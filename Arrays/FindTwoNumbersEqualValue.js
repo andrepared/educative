@@ -96,3 +96,16 @@ function findSum(arr, value) {
     }
   return false;
 }
+
+/**
+In this solution, we will first sort the array. Then we will use two variables, one starting from the first index of the array and second from size-1 index of the array. If the sum of the elements on these indexes of the array is smaller than given value then increment index from the start else decrement index from the end, until the given value is not equal to the sum. Store the elements on these indexes in result array and return it.
+
+Time Complexity
+Since most popular sorting functions take O(nlogn)
+O(nlogn)
+, let’s assume that the JavaScript sort() function takes the same. Then, in the worst-case scenario, the entire array iterated from opposite ends would take O(n)
+O(n)
+. So this solution is in O(nlog(n))
+O(nlog(n))
+.
+ */
