@@ -64,3 +64,4 @@ function findSecondMaximum(arr) {
 
 /**
 This solution is in O(n) since the array is traversed once only. */
+
