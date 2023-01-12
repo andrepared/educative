@@ -57,4 +57,9 @@ stack.push2(50)
  /**
 This implementation is space-efficient as it utilizes all of the available space. It doesn’t cause an overflow if there is any space available in the array. The tops of the two stacks are the two extreme ends of the array. The first stack starts from the first element at index 0, and the second starts from the last element. The first element in stack2 is pushed at index (this.top2 - 1) where top2 is equal to arr.length for the push of the first element. Both stacks grow (or shrink) in the opposite direction.
 
-To check for overflow, all we need to do is check for space between the top elements of both stacks as reflected in the code. */
+To check for overflow, all we need to do is check for space between the top elements of both stacks as reflected in the code. 
+
+Time Complexity
+
+All the operations take constant time because the array is being indexed and not resized.
+*/

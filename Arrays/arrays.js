@@ -6,7 +6,7 @@ function mergeArrays(arr1, arr2) {
     var i = 0,
         j = 0;
 // Traverse both arrays and insert small value for arr1 and arr2 into result array and increment the array index.
-// If an array is completely traversed, while other one is left then just copy all the remaining elements into result array.
+// If an array is completely traversed, while other one is left, then just copy all the remaining elements into result array.
     while ((i < arr1.length) && (j < arr2.length)) {
         if (arr1[i] < arr2[j]) {
             merged.push(arr1[i]);
