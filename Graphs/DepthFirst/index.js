@@ -57,3 +57,12 @@ g.addEdge(0, 2);
 g.addEdge(1, 3);
 g.addEdge(1, 4);
 console.log(dfsTraversal(g, 0)); //Should output 01342 
+
+/**
+The approach is very similar to that of traversing the graph using breadth first search. However, instead of a queue, we use a stack since it follows the Last In First Out (LIFO) approach. We will see how that is useful here.
+
+dfsTraversal calls the helper function dfs_helper on every vertex which is not visited. dfs_helper starts from source, each node is pushed into the stack. Whenever a node is popped, it is marked visited in the visited array and its adjacent nodes are pushed into the stack. Now we can understand why we need the stack because it keeps popping out the new adjacent nodes (gives you a node at a new level) instead of returning the previous nodes that we pushed in.
+
+Time Complexity
+This algorithm traverses the whole array once. Hence, it’s time complexity is O(V + E)
+ */
