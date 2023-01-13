@@ -71,3 +71,18 @@ g.addEdge(0, 2);
 g.addEdge(1, 3);
 g.addEdge(2, 3);
 g.printGraph();
+
+
+/**
+Let’s break down the two new functions that we’ve implemented.
+
+addEdge (source, destination)
+Thanks to the graph constructor, source and destination are already stored as index of our array. This function simply inserts a destination vertex into the adjacency linked list of the source vertex by running the following line of code:
+
+this.list[source].insertAtHead(destination)
+One important thing to note is that we are implementing a directed graph, so addEdge(0, 1) is not equal to addEdge(1, 0).
+
+printGraph()
+This function uses a simple nested loop to iterate through the adjacency list. Each linked list is being traversed here.
+
+ */
