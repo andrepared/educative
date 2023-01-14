@@ -48,3 +48,9 @@ g2.addEdge(6,5);
 console.log(numEdges(g));
 
 console.log(numEdges(g2));
+/**
+Nothing too tricky going on here. We simply traverse through the complete adjacency list and count the size of each linked list. In an undirected graph, the number of edges is always even as the edges are bidirectional. To get the number of unique edges, we half the total sum.
+
+Time complexity
+O(V + E)
+ */
