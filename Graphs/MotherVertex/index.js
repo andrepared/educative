@@ -61,3 +61,11 @@ g.addEdge(1, 2);
 g.addEdge(3, 0);
 g.addEdge(3, 1);
 console.log(findMotherVertex(g));
+/**
+This is the brute force approach for solving this problem. We run a DFS on each vertex using DFS and keep track of the number of vertices visited in the search. If it is equal to g.vertices, then that vertex can reach all the vertices and is, therefore,​ a mother vertex.
+
+The algorithm would also work with a BFS using a queue.
+
+Time Complexity
+Since we run a DFS on each node, the time complexity is O(V(V + E))
+ */
