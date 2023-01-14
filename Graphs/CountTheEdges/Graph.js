@@ -6,7 +6,7 @@ module.exports = class Graph {
   constructor(vertices) {
     
     this.vertices = vertices;
-     
+    
     this.list = [];
     
     var it;
