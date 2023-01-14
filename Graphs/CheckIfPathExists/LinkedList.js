@@ -1,53 +1,160 @@
-
 "use strict";
-const LinkedList = require('./LinkedList.js');
 const Node = require('./Node.js');
-const Stack = require('./Stack.js');
-const Graph = require('./Graph.js');
-//Perfrom DFS Traversal starting from source and if you reach destination
-//then it means that there exist a path between source and destination 
-//In that case, return true and if you traverse the graph but can't reach 
-//the destination, then simply return false
-function checkPath(g, source, destination) {
-  //Base case
-  if (source == destination){
-  return true;
+
+module.exports = class LinkedList {
+  constructor() {
+    this.head = null;
   }
-  //A list to hold the history of visited nodes (by default all false)
-  //Make a node visited whenever you push it into stack
-  let visited = [];
-  for (var x = 0; x < g.vertices; x++) {
-    visited.push(false);
+
+  //Insertion At Head  
+  insertAtHead(newData) {
+    let tempNode = new Node(newData);
+    tempNode.nextElement = this.head;
+    this.head = tempNode;
+    return this; //returning the updated list
   }
-  //Create Stack
-  let stack = new Stack(g.vertices);
-  stack.push(source);
-  visited[source] = true;
-  //Traverse while stack is not empty
-  while (stack.isEmpty() == false) {
-    //Pop a vertex/node from stack
-    let current_node = stack.pop();
-    //Get adjacent vertices to the current_node from the list,
-    //and if only push unvisited adjacent vertices into stack
-    //Before pushing into stack, check if it's the destination
-    let temp = g.list[current_node].head;
-    while (temp != null) {
-      if (visited[temp.data] == false) {
-        if (temp.data == destination) {
-          return true;
-        }
-        stack.push(temp.data);
-        visited[temp.data] = true;
+
+  isEmpty() {
+    return (this.head == null);
+  }
+
+  //function to print the linked list
+  printList() {
+    if (this.isEmpty()) {
+      console.log("Empty List");
+      return false;
+    } else {
+      let temp = this.head;
+      while (temp != null) {
+        process.stdout.write(String(temp.data));
+        process.stdout.write(" -> ");
+        temp = temp.nextElement;
       }
-      temp = temp.nextElement
+      console.log("null");
+      return true;
     }
   }
 
-  ////
-  return false;
-}
+  getHead() {
+    return this.head;
+  }
+  setHead(newHead) {
+    this.head = newHead;
+    return this;
+  }
+  getListStr() {
+    if (this.isEmpty()) {
+      console.log("Empty List");
+      return "null";
+    } else {
+      let st = "";
+      let temp = this.head
+      while (temp != null) {
+        st += String(temp.data);
+        st += " -> ";
+        temp = temp.nextElement;
+      }
+      st += "null";
+      return st;
+    }
+  }
+  insertAtTail(newData) {
+    //Creating a new Node with data as newData
+    let node = new Node(newData);
 
-let g = new Graph(3);
-g.addEdge(0, 1);
-g.addEdge(1, 2);
-console.log(checkPath(g, 0, 2));
+    //check for case when list is empty
+    if (this.isEmpty()) {
+      //Needs to Insert the new node at Head
+      this.head = node;
+      return this;
+    }
+
+    //Start from head
+    let currentNode = this.head;
+
+    //Iterate to the last element
+    while (currentNode.nextElement != null) {
+      currentNode = currentNode.nextElement;
+    }
+
+    //Make new node the nextElement of last node of list
+    currentNode.nextElement = node;
+    return this;
+  }
+  search(value) {
+    //Start from the first element
+    let currentNode = this.head;
+
+    //Traverse the list until you find the value or reach the end
+    while (currentNode != null) {
+      if (currentNode.data == value) {
+        return true; //value found
+      }
+      currentNode = currentNode.nextElement
+    }
+    return false; //value not found
+  }
+  deleteAtHead() {
+    //if list is empty, do nothing
+    if (this.isEmpty()) {
+      return this;
+    }
+    //Get the head and first element of the list
+    let firstElement = this.head;
+
+    //If list is not empty, link head to the nextElement of firstElement
+    this.head = firstElement.nextElement;
+
+    return this;
+  }
+  deleteVal(value) {
+    let deleted = null; //True or False
+    //Write code here
+
+    //if list is empty return false
+    if (this.isEmpty()) {
+      return false;
+    }
+
+    //else get pointer to head
+    let currentNode = this.head;
+    // if first node's is the node to be deleted, delete it and return true
+    if (currentNode.data == value) {
+      this.head = currentNode.nextElement;
+      return true;
+    }
+
+    // else traverse the list
+    while (currentNode.nextElement != null) {
+      // if a node whose next node has the value as data, is found, delete it from the list and return true
+      if (currentNode.nextElement.data == value) {
+        currentNode.nextElement = currentNode.nextElement.nextElement;
+        return true;
+      }
+      currentNode = currentNode.nextElement;
+    }
+    //else node was not found, return false
+    deleted = false;
+    return deleted;
+  }
+  deleteAtTail() {
+    // check for the case when linked list is empty
+    if (this.isEmpty()) {
+      return this;
+    }
+    //if linked list is not empty, get the pointer to first node
+    let firstNode = this.head;
+    //check for the corner case when linked list has only one element
+    if (firstNode.nextElement == null) {
+      this.deleteAtHead();
+      return this;
+    }
+    //otherwise traverse to reach second last node
+    while (firstNode.nextElement.nextElement != null) {
+      firstNode = firstNode.nextElement;
+    }
+    //since you have reached second last node, just update its nextElement pointer to point at null, skipping the last node
+    firstNode.nextElement = null;
+    return this;
+  }
+}

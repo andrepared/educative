@@ -1,53 +1,57 @@
-
 "use strict";
 const LinkedList = require('./LinkedList.js');
 const Node = require('./Node.js');
-const Stack = require('./Stack.js');
-const Graph = require('./Graph.js');
-//Perfrom DFS Traversal starting from source and if you reach destination
-//then it means that there exist a path between source and destination 
-//In that case, return true and if you traverse the graph but can't reach 
-//the destination, then simply return false
-function checkPath(g, source, destination) {
-  //Base case
-  if (source == destination){
-  return true;
-  }
-  //A list to hold the history of visited nodes (by default all false)
-  //Make a node visited whenever you push it into stack
-  let visited = [];
-  for (var x = 0; x < g.vertices; x++) {
-    visited.push(false);
-  }
-  //Create Stack
-  let stack = new Stack(g.vertices);
-  stack.push(source);
-  visited[source] = true;
-  //Traverse while stack is not empty
-  while (stack.isEmpty() == false) {
-    //Pop a vertex/node from stack
-    let current_node = stack.pop();
-    //Get adjacent vertices to the current_node from the list,
-    //and if only push unvisited adjacent vertices into stack
-    //Before pushing into stack, check if it's the destination
-    let temp = g.list[current_node].head;
-    while (temp != null) {
-      if (visited[temp.data] == false) {
-        if (temp.data == destination) {
-          return true;
-        }
-        stack.push(temp.data);
-        visited[temp.data] = true;
-      }
-      temp = temp.nextElement
+
+module.exports = class Graph {
+  constructor(vertices) {
+    
+    this.vertices = vertices;
+   
+    this.list = [];
+    
+    var it;
+    for (it = 0; it < vertices; it++) {
+      let temp = new LinkedList();
+      this.list.push(temp);
     }
   }
 
-  ////
-  return false;
-}
+  addEdge(source, destination) {
+    if (source < this.vertices && destination < this.vertices){
+    
+    this.list[source].insertAtHead(destination);
+    this.list[destination].insertAtHead(source);
+    }
+    
+    return this;
+  }
 
-let g = new Graph(3);
-g.addEdge(0, 1);
-g.addEdge(1, 2);
-console.log(checkPath(g, 0, 2));
+  printGraph() {
+    console.log(">>Adjacency List of Directed Graph<<");
+    var i;
+    for (i = 0; i < this.list.length; i++) {
+      process.stdout.write("|" + String(i) + "| => ");
+      let temp = this.list[i].getHead();
+      while (temp != null) {
+        process.stdout.write("[" + String(temp.data) + "] -> ");
+        temp = temp.nextElement;
+      }
+      console.log("null ");
+    }
+  }
+
+  strGraph() {
+    let str = "";
+    var i;
+    for (i = 0; i < this.list.length; i++) {
+      str = str + "|" + String(i) + "| => ";
+      let temp = this.list[i].getHead();
+      while (temp != null) {
+        str += ("[" + String(temp.data) + "] -> ");
+        temp = temp.nextElement;
+      }
+      str += "null ";
+    }
+    return str;
+  }
+}
