@@ -30,6 +30,7 @@ function rightRotate(arr, n) {
     rotatedList.push(arr[item])
     for (var item = 0; item < arr.length - n; item++)
     rotatedList.push(arr[item])
+  
   return rotatedList  
       
   

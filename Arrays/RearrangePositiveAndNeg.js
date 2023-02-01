@@ -43,3 +43,17 @@ function reArrange(arr) {
 
 // Time Complexity
 // O(n) with no extra space used as the entire array is iterated over.
+
+function reArrange(arr) {
+    var pos = [];
+    var neg = [];
+    for (let ele of arr) {
+        if (ele < 0) {
+            neg.push(ele)
+        } else {
+            pos.push(ele)
+        }
+        return neg.concat(pos)
+    }
+
+}
