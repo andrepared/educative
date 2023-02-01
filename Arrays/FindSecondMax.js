@@ -40,7 +40,7 @@ function findSecondMaximum(arr) {
     return secondMax;
     
 }
-//We traverse the array twice. In the first traversal, we find the maximum element. In the second traversal, we find the greatest element less than the element obtained in the first traversal.
+// We traverse the array twice. In the first traversal, we find the maximum element. In the second traversal, we find the greatest element less than the element obtained in the first traversal.
 /**
 Time Complexity
 The time complexity of the solution is in O(n) since the list is traversed twice. */

@@ -23,3 +23,14 @@ function rightRotate(arr, n){
 function rightRotate(arr, n) {
     return (arr.splice(arr.length - n)).concat(arr.splice(0, arr.length))
 }
+
+function rightRotate(arr, n) {
+  var rotatedList = [];
+  for (var item = arr.length - n; item < arr.length; item++) 
+    rotatedList.push(arr[item])
+    for (var item = 0; item < arr.length - n; item++)
+    rotatedList.push(arr[item])
+  return rotatedList  
+      
+  
+}
