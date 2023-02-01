@@ -25,3 +25,14 @@ function findMinimum(arr) {
 }
 
 //Start with the first element, which is 9 in this example, and save it as the smallest value. Then, iterate over the rest of the array, and whenever an element that is smaller than the number already stored as the minimum is found, set the minimum to that number. By the end of the array, the number stored in the minimum will be the smallest integer in the whole array.
+
+function findMin(arr) {
+    currentMin = 0;
+    for (let val of arr) {
+        if (val < currentMin) {
+            currentMin = val;
+        }
+        return currentMin;
+    }
+
+}
